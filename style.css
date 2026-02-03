@@ -1,0 +1,241 @@
+:root {
+    --primary: #4a90e2;
+    --bg: #f5f7fa;
+    --card-bg: #ffffff;
+    --text-main: #333;
+    --text-sub: #666;
+    --radius: 12px;
+    --shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+body {
+    font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background-color: var(--bg);
+    color: var(--text-main);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    height: 40px;
+}
+
+.nav-title {
+    font-size: 0.9rem;
+    color: #999;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: var(--text-sub);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.back-btn:hover {
+    background-color: #f0f0f0;
+    color: var(--primary);
+}
+
+.back-btn.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+h1, h2, h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 { font-size: 1.5rem; color: var(--primary); margin: 0; }
+h2 { font-size: 1.25rem; color: #444; margin-top: 20px; }
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    height: 6px;
+    background: #eee;
+    border-radius: 3px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    background: var(--primary);
+    width: 10%;
+    transition: width 0.4s ease;
+}
+
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+button.choice-btn {
+    background: #fff;
+    border: 2px solid #eee;
+    padding: 15px 20px;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+button.choice-btn:hover {
+    border-color: var(--primary);
+    background: #f9fbff;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.view-section { display: none; }
+.view-section.active { 
+    display: block; 
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.result-header {
+    text-align: center;
+    padding: 20px;
+    background: #f0f4f8;
+    border-radius: var(--radius);
+    margin-bottom: 30px;
+}
+
+.final-emotion {
+    font-size: 2rem;
+    font-weight: bold;
+    display: block;
+    margin: 10px 0;
+}
+
+.result-sub-text {
+    font-size: 0.9rem; 
+    color: #666;
+}
+
+.content-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th { background-color: #f8f9fa; }
+
+.highlight-row {
+    background-color: #e8f4fd;
+    border-left: 4px solid var(--primary);
+    font-weight: bold;
+}
+
+.restart-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 15px;
+    border-radius: var(--radius);
+    margin-top: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.restart-btn:hover {
+    background: #357abd;
+}
+
+/* 查看图片按钮的样式 */
+.image-link-btn {
+    background: transparent;
+    border: 1px dashed #bbb;
+    color: #555;
+    padding: 12px;
+    border-radius: var(--radius);
+    width: 100%;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.image-link-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: #f0f7ff;
+}
+
+/* 图片容器样式 */
+.full-image-container {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 8px;
+    box-sizing: border-box; /* 确保padding不会撑大宽度 */
+    overflow: hidden;
+}
+
+.full-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+}
+

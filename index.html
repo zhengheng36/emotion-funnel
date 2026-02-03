@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情绪精准定位漏斗 v2.2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <!-- 导航区域 -->
+    <div class="nav-header">
+        <button id="back-btn" class="back-btn hidden" onclick="app.back()">
+            ⬅ 返回
+        </button>
+        <div class="nav-title">情绪漏斗</div>
+        <div style="width: 60px;"></div>
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress-fill" id="progress"></div>
+    </div>
+
+    <!-- Step 1: 主页 -->
+    <div id="view-q1" class="view-section active">
+        <h1>当前感觉</h1>
+        <h2>问题 1：你现在的感觉大体上是舒服的，还是难受的？</h2>
+        <div class="btn-group">
+            <button class="choice-btn" onclick="app.navigate('view-group', 'G')">
+                <span>🟢 舒服 / 积极</span> <span>➜</span>
+            </button>
+            <button class="choice-btn" onclick="app.navigate('view-q2')">
+                <span>🔴 难受 / 消极</span> <span>➜</span>
+            </button>
+            <button class="choice-btn" onclick="app.navigate('view-group', 'D')">
+                <span>⚪ 惊讶 / 意外</span> <span>➜</span>
+            </button>
+        </div>
+
+        <!-- 【新增】主页查看图片的入口 -->
+        <div style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
+            <button class="image-link-btn" onclick="app.navigate('view-image')">
+                🔍 查看完整情绪识别轮盘
+            </button>
+        </div>
+    </div>
+
+    <div id="view-q2" class="view-section">
+        <h1>身体能量</h1>
+        <h2>问题 2：你的身体能量状态如何？</h2>
+        <div class="btn-group">
+            <button class="choice-btn" onclick="app.navigate('view-q3')">
+                <span>🔥 能量高 (心跳快、想动、肌肉紧绷)</span> <span>➜</span>
+            </button>
+            <button class="choice-btn" onclick="app.navigate('view-q4')">
+                <span>💧 能量低 (身体沉重、不想动、无力)</span> <span>➜</span>
+            </button>
+            <button class="choice-btn" onclick="app.navigate('view-group', 'F')">
+                <span>🤢 排斥感 (想吐、皱眉、想推开)</span> <span>➜</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="view-q3" class="view-section">
+        <h1>能量方向</h1>
+        <h2>问题 3：这种高能量的方向是？</h2>
+        <div class="btn-group">
+            <button class="choice-btn" onclick="app.navigate('view-group', 'A')">
+                <span>⚔️ 对外 / 攻击 (想反击、想破坏)</span> <span>➜</span>
+            </button>
+            <button class="choice-btn" onclick="app.navigate('view-group', 'B')">
+                <span>🛡️ 对内 / 躲避 (想逃跑、想钻地洞)</span> <span>➜</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="view-q4" class="view-section">
+        <h1>无力感来源</h1>
+        <h2>问题 4：这种无力感的主要来源是？</h2>
+        <div class="btn-group">
+            <button class="choice-btn" onclick="app.navigate('view-group', 'C')">
+                <span>💔 情感上的痛 (失去感、想哭)</span> <span>➜</span>
+            </button>
+            <button class="choice-btn" onclick="app.navigate('view-group', 'E')">
+                <span>🔋 生理/心理的累 (过载、死机)</span> <span>➜</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="view-group" class="view-section">
+        <h1>精准定位</h1>
+        <h2 id="group-title"></h2>
+        <p class="subtitle">请选择最符合你当下情况的描述：</p>
+        <div id="group-questions" class="btn-group"></div>
+    </div>
+
+    <div id="view-final" class="view-section">
+        <h1>细微差别</h1>
+        <h2 id="sub-title"></h2>
+        <div id="final-choices" class="btn-group"></div>
+    </div>
+
+    <!-- 结果页 -->
+    <div id="view-result" class="view-section">
+        <div class="result-header">
+            <div>你当前的情绪定位是：</div>
+            <div class="final-emotion" id="result-word"></div>
+            <div class="result-sub-text">属于 <span id="result-core"></span> 组</div>
+        </div>
+
+        <!-- 【新增】结果页查看图片的入口 -->
+        <button class="image-link-btn" style="margin-bottom: 20px;" onclick="app.navigate('view-image')">
+            🔍 对照完整情绪轮盘
+        </button>
+
+        <div class="content-card">
+            <h3>📖 情绪解析与解药</h3>
+            <p>这是你的情绪机制拆解。**高亮行**是你当前的状态。</p>
+            <div id="content-display"></div>
+        </div>
+
+        <button class="restart-btn" onclick="location.reload()">🔄 重新测试</button>
+    </div>
+
+    <!-- 【新增】专门展示图片的视图 -->
+    <div id="view-image" class="view-section">
+        <h1>情绪识别轮盘</h1>
+        <div class="full-image-container">
+            <!-- 这里引用同目录下的 image.jpg -->
+            <img src="image.jpg" alt="情绪识别轮盘">
+        </div>
+        
+        <!-- 返回按钮：调用 app.back() 会自动回到上一个页面（无论是主页还是结果页） -->
+        <button class="choice-btn" style="justify-content: center; margin-top: 20px;" onclick="app.back()">
+            ⬅ 返回刚才的位置
+        </button>
+    </div>
+
+</div>
+
+<script src="data.js"></script>
+<script src="logic.js"></script>
+
+</body>
+</html>
