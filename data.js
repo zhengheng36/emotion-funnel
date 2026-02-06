@@ -36,8 +36,8 @@ const RESOURCES = {
             step3_text_suffix: "，具体表现为？",
 
             result_intro: "你当前的情绪定位是：",
-            result_group_prefix: "",
-            result_group_suffix: "", // 中文显示：属于 A组 组 (有点怪，不过A组本身带组字，可以接受，或者这里留空)
+            result_group_prefix: "属于",
+            result_group_suffix: "组", // 中文显示：属于 A组 组 (有点怪，不过A组本身带组字，可以接受，或者这里留空)
             result_analysis_title: "📖 情绪解析与解药",
             result_analysis_intro: "这是你的情绪机制拆解。_高亮行_是你当前的状态。",
             
@@ -196,8 +196,8 @@ const RESOURCES = {
             step3_text_suffix: ", specifically?",
 
             result_intro: "Your current emotion is:",
-            result_group_prefix: "", // 英文里不需要"Group Group"重复，留空即可
-            result_group_suffix: "", // 英文里不需要"Group"后缀
+            result_group_prefix: " ", // 英文里不需要"Group Group"重复，留空即可
+            result_group_suffix: " ", // 英文里不需要"Group"后缀
             result_analysis_title: "📖 Analysis & Antidote",
             result_analysis_intro: "Here is the mechanism of your emotion. _Highlighted_ row is your state.",
             

@@ -15,10 +15,17 @@
             <span data-i18n="btn_back">⬅ 返回</span>
         </button>
         
-        <!-- 语言切换按钮 (新增) -->
-        <button class="lang-btn" onclick="app.toggleLang()">
-            <span id="lang-display">EN / 中</span>
-        </button>
+        <div class="nav-actions">
+            <!-- 语言切换按钮 -->
+            <button class="action-btn" onclick="app.toggleLang()">
+                <span id="lang-display">EN / 中</span>
+            </button>
+            
+            <!-- 【新增】夜间模式切换按钮 -->
+            <button class="action-btn" onclick="app.toggleTheme()" title="Switch Theme">
+                <span id="theme-icon">🌙</span>
+            </button>
+        </div>
     </div>
 
     <div class="progress-bar">
@@ -40,7 +47,7 @@
                 <span data-i18n="q1_opt3">⚪ 惊讶 / 意外</span> <span>➜</span>
             </button>
         </div>
-        <div style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
+        <div style="margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 20px;">
             <button class="image-link-btn" onclick="app.navigate('view-image')">
                 <span data-i18n="btn_image">🔍 查看完整情绪识别轮盘</span>
             </button>
@@ -125,7 +132,8 @@
             <div id="content-display"></div>
         </div>
 
-        <button class="restart-btn" onclick="location.reload()">
+        <!-- 【修改】这里绑定的是 app.restart() 而不是 location.reload() -->
+        <button class="restart-btn" onclick="app.restart()">
             <span data-i18n="btn_restart">🔄 重新测试</span>
         </button>
     </div>
@@ -136,11 +144,11 @@
         <div class="full-image-container">
             <img src="image.jpg" alt="情绪识别轮盘" onclick="app.toggleZoom(true)" style="cursor: zoom-in;" title="Zoom">
         </div>
+        
         <button class="choice-btn" style="justify-content: center; margin-top: 20px;" onclick="app.back()">
             <span data-i18n="btn_back_prev">⬅ 返回刚才的位置</span>
         </button>
     </div>
-
 </div>
 
 <script src="data.js"></script>

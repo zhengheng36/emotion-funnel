@@ -3,10 +3,54 @@ const app = {
     state: {
         currentViewId: 'view-q1',
         history: [],
-        group: null,            // 例如 'A'
-        currentQuestionObj: null, // 当前选中的核心问题对象
-        subChoiceIndex: null,   // 【改动】记录最终选项的索引 (0, 1...)
-        lang: 'zh'
+        group: null,            
+        currentQuestionObj: null, 
+        currentQuestionIndex: null,
+        subChoiceIndex: null,   
+        lang: 'zh',
+        theme: 'light' // 默认主题
+    },
+
+    // --- 【新增】软重置：保留语言，重置流程 ---
+    restart: () => {
+        // 1. 清空所有选择状态
+        app.state.history = [];
+        app.state.group = null;
+        app.state.currentQuestionObj = null;
+        app.state.currentQuestionIndex = null;
+        app.state.subChoiceIndex = null;
+        
+        // 2. 注意：这里故意不重置 app.state.lang 和 app.state.theme
+
+        // 3. 强制回到第一页
+        app.changeView('view-q1');
+        
+        // 4. 滚动到顶部
+        window.scrollTo(0, 0);
+    },
+
+    // --- 【新增】夜间模式切换 ---
+    toggleTheme: () => {
+        const newTheme = app.state.theme === 'light' ? 'dark' : 'light';
+        app.applyTheme(newTheme);
+    },
+
+    applyTheme: (themeName) => {
+        app.state.theme = themeName;
+        const htmlEl = document.documentElement;
+        const iconEl = document.getElementById('theme-icon');
+
+        // 设置 HTML 属性供 CSS 使用
+        if (themeName === 'dark') {
+            htmlEl.setAttribute('data-theme', 'dark');
+            iconEl.innerText = '☀️'; // 切换成太阳图标
+        } else {
+            htmlEl.removeAttribute('data-theme');
+            iconEl.innerText = '🌙'; // 切换成月亮图标
+        }
+        
+        // 保存到本地存储（刷新后还在）
+        localStorage.setItem('emotionFunnelTheme', themeName);
     },
 
     // --- 语言切换 ---
@@ -47,19 +91,17 @@ const app = {
     // Step 2 -> Step 3
     selectSubOption: (questionObj, qIndex) => {
         app.state.history.push(app.state.currentViewId);
-        // 保存当前的核心问题对象，以及它在数组中的索引
         app.state.currentQuestionObj = questionObj; 
-        app.state.currentQuestionIndex = qIndex; // 新增：保存核心问题的索引
+        app.state.currentQuestionIndex = qIndex;
         
         app.renderFinalChoices();
         app.changeView('view-final');
     },
 
     // Step 3 -> Result
-    // 【改动】这里不再传字符串，而是传 index
     showResult: (index) => {
         app.state.history.push(app.state.currentViewId);
-        app.state.subChoiceIndex = index; // 记录你选了第几个
+        app.state.subChoiceIndex = index;
         
         app.renderResult();
         app.changeView('view-result');
@@ -115,7 +157,6 @@ const app = {
             const btn = document.createElement('button');
             btn.className = 'choice-btn';
             btn.innerHTML = `<span>${index + 1}. ${q.text}</span> <span>➜</span>`;
-            // 传入 q 对象和 index
             btn.onclick = () => app.selectSubOption(q, index);
             container.appendChild(btn);
         });
@@ -124,10 +165,8 @@ const app = {
     renderFinalChoices: () => {
         const lang = app.state.lang;
         const groupCode = app.state.group;
-        
-        // 【关键】从当前的语言库里，重新获取正确的问题对象
-        // 这样即使语言切换了，显示的也是新语言的选项
         const qIndex = app.state.currentQuestionIndex;
+        
         const currentLangGroup = RESOURCES[lang].groups[groupCode];
         const questionObj = currentLangGroup.questions[qIndex];
         const ui = RESOURCES[lang].ui;
@@ -137,12 +176,9 @@ const app = {
         container.innerHTML = '';
 
         questionObj.subs.forEach((subText, index) => {
-            // subText 格式: "描述 ➔ 词汇"
-            // 我们还是只显示 text，但点击时传 index
             const btn = document.createElement('button');
             btn.className = 'choice-btn';
             btn.innerHTML = `<span>${subText}</span>`;
-            // 【改动】点击传递索引 index
             btn.onclick = () => app.showResult(index);
             container.appendChild(btn);
         });
@@ -151,32 +187,25 @@ const app = {
     renderResult: () => {
         const lang = app.state.lang;
         const groupCode = app.state.group;
-        
-        // 1. 获取当前语言的组信息
         const groupInfo = RESOURCES[lang].groups[groupCode];
         
-        // 2. 获取当前语言的最终词汇
-        // 路径: Group -> Questions[index] -> Subs[index] -> split拿到后半部分
         const qIndex = app.state.currentQuestionIndex;
         const subIndex = app.state.subChoiceIndex;
         
         const questionObj = groupInfo.questions[qIndex];
         const subTextString = questionObj.subs[subIndex];
         
-        // 解析 "Description ➔ Word"
         const parts = subTextString.split('➔');
         const finalWord = parts[1] ? parts[1].trim() : parts[0].trim();
-        const coreEmotion = questionObj.core; // 用于表格高亮匹配
+        const coreEmotion = questionObj.core;
 
         document.getElementById('result-word').innerText = finalWord;
         document.getElementById('result-word').style.color = groupInfo.color;
         document.getElementById('result-core').innerText = groupInfo.name;
 
-        // 3. 渲染内容表格
         const contentContainer = document.getElementById('content-display');
         contentContainer.innerHTML = RESOURCES[lang].content[groupCode];
 
-        // 4. 表格高亮 (模糊匹配 Core 或 FinalWord)
         const rows = contentContainer.querySelectorAll('tr');
         rows.forEach(row => {
             const key = row.getAttribute('data-key');
@@ -187,6 +216,14 @@ const app = {
     }
 };
 
+// 初始化
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. 加载语言文字
     app.updateStaticText();
+    
+    // 2. 加载保存的主题
+    const savedTheme = localStorage.getItem('emotionFunnelTheme');
+    if (savedTheme) {
+        app.applyTheme(savedTheme);
+    }
 });

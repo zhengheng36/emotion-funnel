@@ -1,35 +1,62 @@
 :root {
+    /* --- 核心变量 (亮色模式) --- */
     --primary: #4a90e2;
-    --bg: #f5f7fa;
-    --card-bg: #ffffff;
-    --text-main: #333;
-    --text-sub: #666;
-    --radius: 12px;
+    --primary-hover: #357abd;
+    
+    --bg-body: #f5f7fa;
+    --bg-card: #ffffff;
+    --bg-btn: #ffffff;
+    --bg-btn-hover: #f9fbff;
+    
+    --text-main: #333333;
+    --text-sub: #666666;
+    --border-color: #eeeeee;
+    
     --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    --radius: 12px;
+}
+
+/* --- 暗色模式 (Dark Mode) --- */
+[data-theme="dark"] {
+    --primary: #4a90e2;       /* 保持主色调，或者稍微调亮一点 */
+    --primary-hover: #5da3f0;
+    
+    --bg-body: #121212;       /* 深黑背景 */
+    --bg-card: #1e1e1e;       /* 卡片深灰 */
+    --bg-btn: #2d2d2d;        /* 按钮背景 */
+    --bg-btn-hover: #383838;
+    
+    --text-main: #e0e0e0;     /* 文字变白 */
+    --text-sub: #a0a0a0;
+    --border-color: #333333;  /* 边框变深 */
+    
+    --shadow: 0 4px 12px rgba(0,0,0,0.3); /* 阴影加重 */
 }
 
 body {
     font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-    background-color: var(--bg);
+    background-color: var(--bg-body);
     color: var(--text-main);
     margin: 0;
     padding: 20px;
     display: flex;
     justify-content: center;
     min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease; /* 平滑过渡 */
 }
 
 .container {
     width: 100%;
     max-width: 800px;
-    background: var(--card-bg);
+    background: var(--bg-card);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     padding: 30px;
     position: relative;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* 导航栏 */
 .nav-header {
     display: flex;
     justify-content: space-between;
@@ -38,26 +65,29 @@ body {
     height: 40px;
 }
 
-.nav-title {
-    font-size: 0.9rem;
-    color: #999;
+.nav-actions {
+    display: flex;
+    gap: 10px; /* 按钮之间的间距 */
 }
 
-.back-btn {
-    background: none;
-    border: none;
+/* 按钮通用样式 */
+.back-btn, .action-btn {
+    background: var(--bg-btn); /* 适配夜间 */
+    border: 1px solid var(--border-color);
     color: var(--text-sub);
-    font-size: 1rem;
+    font-size: 0.9rem;
     cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 6px;
+    padding: 6px 12px;
+    border-radius: 20px; /* 圆角 */
     display: flex;
     align-items: center;
     transition: all 0.2s;
+    font-weight: bold;
 }
 
-.back-btn:hover {
-    background-color: #f0f0f0;
+.back-btn:hover, .action-btn:hover {
+    background-color: var(--bg-btn-hover);
+    border-color: var(--primary);
     color: var(--primary);
 }
 
@@ -72,17 +102,18 @@ h1, h2, h3 {
 }
 
 h1 { font-size: 1.5rem; color: var(--primary); margin: 0; }
-h2 { font-size: 1.25rem; color: #444; margin-top: 20px; }
+h2 { font-size: 1.25rem; color: var(--text-main); margin-top: 20px; }
+h3 { color: var(--text-main); }
 
 .subtitle {
     text-align: center;
-    color: #666;
+    color: var(--text-sub);
     margin-bottom: 20px;
 }
 
 .progress-bar {
     height: 6px;
-    background: #eee;
+    background: var(--border-color);
     border-radius: 3px;
     margin-bottom: 30px;
     overflow: hidden;
@@ -101,8 +132,8 @@ h2 { font-size: 1.25rem; color: #444; margin-top: 20px; }
 }
 
 button.choice-btn {
-    background: #fff;
-    border: 2px solid #eee;
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
     padding: 15px 20px;
     border-radius: var(--radius);
     font-size: 1rem;
@@ -117,7 +148,7 @@ button.choice-btn {
 
 button.choice-btn:hover {
     border-color: var(--primary);
-    background: #f9fbff;
+    background: var(--bg-btn-hover);
     transform: translateY(-2px);
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
@@ -136,9 +167,10 @@ button.choice-btn:hover {
 .result-header {
     text-align: center;
     padding: 20px;
-    background: #f0f4f8;
+    background: var(--bg-btn-hover); /* 微妙的背景色 */
     border-radius: var(--radius);
     margin-bottom: 30px;
+    border: 1px solid var(--border-color);
 }
 
 .final-emotion {
@@ -150,12 +182,12 @@ button.choice-btn:hover {
 
 .result-sub-text {
     font-size: 0.9rem; 
-    color: #666;
+    color: var(--text-sub);
 }
 
 .content-card {
-    background: #fff;
-    border: 1px solid #eee;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 20px;
     margin-top: 20px;
@@ -166,18 +198,19 @@ table {
     border-collapse: collapse;
     margin-top: 15px;
     font-size: 0.9rem;
+    color: var(--text-main);
 }
 
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     padding: 10px;
     text-align: left;
 }
 
-th { background-color: #f8f9fa; }
+th { background-color: var(--bg-btn-hover); }
 
 .highlight-row {
-    background-color: #e8f4fd;
+    background-color: rgba(74, 144, 226, 0.15) !important; /* 使用主色调的透明版 */
     border-left: 4px solid var(--primary);
     font-weight: bold;
 }
@@ -195,14 +228,14 @@ th { background-color: #f8f9fa; }
     font-size: 1rem;
 }
 .restart-btn:hover {
-    background: #357abd;
+    background: var(--primary-hover);
 }
 
-/* 查看图片按钮的样式 */
+/* 图片查看按钮 */
 .image-link-btn {
     background: transparent;
-    border: 1px dashed #bbb;
-    color: #555;
+    border: 1px dashed var(--border-color);
+    color: var(--text-sub);
     padding: 12px;
     border-radius: var(--radius);
     width: 100%;
@@ -218,17 +251,17 @@ th { background-color: #f8f9fa; }
 .image-link-btn:hover {
     border-color: var(--primary);
     color: var(--primary);
-    background: #f0f7ff;
+    background: var(--bg-btn-hover);
 }
 
-/* 图片容器样式 */
+/* 图片容器 */
 .full-image-container {
     width: 100%;
-    background: #fff;
-    border: 1px solid #eee;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     padding: 10px;
     border-radius: 8px;
-    box-sizing: border-box; /* 确保padding不会撑大宽度 */
+    box-sizing: border-box;
     overflow: hidden;
 }
 
@@ -239,22 +272,44 @@ th { background-color: #f8f9fa; }
     border-radius: 4px;
 }
 
-/* 语言切换按钮 */
-.lang-btn {
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 5px 12px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    color: var(--text-sub);
-    transition: all 0.2s;
+/* 模态框 (保持不变) */
+.image-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.95);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+    animation: fadeIn 0.3s;
+}
+.image-modal.active { display: flex; }
+.image-modal img {
+    margin: auto;
+    display: block;
+    max-width: 95%;
+    max-height: 90vh;
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    object-fit: contain;
+}
+.close-zoom {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
     font-weight: bold;
+    cursor: pointer;
 }
-
-.lang-btn:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-    background: #f0f7ff;
+.zoom-hint {
+    color: #bbb;
+    margin-top: 15px;
+    font-size: 0.9rem;
 }
-
