@@ -37,9 +37,10 @@ const RESOURCES = {
 
             result_intro: "你当前的情绪定位是：",
             result_group_prefix: "属于",
-            result_group_suffix: "组", // 中文显示：属于 A组 组 (有点怪，不过A组本身带组字，可以接受，或者这里留空)
+            result_group_suffix: "组",
             result_analysis_title: "📖 情绪解析与解药",
-            result_analysis_intro: "这是你的情绪机制拆解。_高亮行_是你当前的状态。",
+            // 注意：这里改成了HTML标签 strong
+            result_analysis_intro: "这是你的情绪机制拆解。<strong>高亮行</strong>是你当前的状态。",
             
             img_title: "情绪识别轮盘",
             img_hint: "提示：点击图片可查看高清大图。",
@@ -130,6 +131,14 @@ const RESOURCES = {
                 <tr data-key="易受伤"><td>易受伤</td><td>脆弱</td><td><strong>防御失效</strong>。心理皮肤变薄，极度敏感。</td><td><strong>自我安抚</strong>。像照顾孩子一样照顾自己。</td></tr>
                 <tr data-key="孤独"><td>孤独</td><td>孤立、被抛弃</td><td><strong>依恋缺失</strong>。渴望连接的信号。</td><td><strong>深度交流</strong>。哪怕只和一个理解你的人聊天。</td></tr>
                 </tbody></table>`,
+            'D': `
+                <p><strong>😮 核心机制：定向反射</strong>。预期与现实不符。</p>
+                <p>惊讶是中性的连接桥梁。解药是<strong>“保持好奇”</strong>：</p>
+                <ul>
+                    <li>如果是惊喜 -> 转化为 <strong>创造力</strong>。</li>
+                    <li>如果是困惑 -> 转化为 <strong>探索欲</strong> (搜集信息)。</li>
+                    <li>如果是惊吓 -> 进行 <strong>着陆练习</strong> (确认安全)。</li>
+                </ul>`,
             'E': `
                 <p><strong>😓 核心机制：系统过载 (Burnout)</strong>。</p>
                 <table><thead><tr><th>次级情绪</th><th>具体感受</th><th>机制与原理</th><th>解药 (Action)</th></tr></thead><tbody>
@@ -148,19 +157,11 @@ const RESOURCES = {
             'G': `
                 <p><strong>😄 核心机制：奖赏回路</strong>。多巴胺、血清素、催产素的协奏曲。</p>
                 <p>保持这种状态的关键是：<strong>觉察并分享</strong>。当你能命名这种快乐，并将其转化为行动或分享给他人时，快乐会倍增。</p>
-                <p>建议：<strong>记录下来</strong>。这是你的心理能量储备。</p>`,
-            'D': `
-                <p><strong>😮 核心机制：定向反射</strong>。预期与现实不符。</p>
-                <p>惊讶是中性的连接桥梁。解药是<strong>“保持好奇”</strong>：</p>
-                <ul>
-                    <li>如果是惊喜 -> 转化为 <strong>创造力</strong>。</li>
-                    <li>如果是困惑 -> 转化为 <strong>探索欲</strong> (搜集信息)。</li>
-                    <li>如果是惊吓 -> 进行 <strong>着陆练习</strong> (确认安全)。</li>
-                </ul>`
+                <p>建议：<strong>记录下来</strong>。这是你的心理能量储备。</p>`
         }
     },
 
-    // --- English Data ---
+    // --- English Data (Full Content) ---
     en: {
         ui: {
             btn_back: "⬅ Back",
@@ -196,10 +197,11 @@ const RESOURCES = {
             step3_text_suffix: ", specifically?",
 
             result_intro: "Your current emotion is:",
-            result_group_prefix: " ", // 英文里不需要"Group Group"重复，留空即可
-            result_group_suffix: " ", // 英文里不需要"Group"后缀
+            result_group_prefix: " ", 
+            result_group_suffix: " ",
             result_analysis_title: "📖 Analysis & Antidote",
-            result_analysis_intro: "Here is the mechanism of your emotion. _Highlighted_ row is your state.",
+            // 注意：改成了 strong 标签，且用词调整
+            result_analysis_intro: "Here is the mechanism of your emotion. <strong>Highlighted row</strong> is your state.",
             
             img_title: "Emotion Wheel",
             img_hint: "Tip: Click image to zoom in.",
@@ -260,59 +262,64 @@ const RESOURCES = {
         },
         content: {
             'A': `
-                <p><strong>😠 Core: Fight</strong>. Anger is protective energy.</p>
+                <p><strong>😠 Core: Fight</strong>. Anger is protective energy triggered when boundaries are violated.</p>
                 <table><thead><tr><th>Emotion</th><th>Mechanism</th><th>Antidote</th></tr></thead><tbody>
-                <tr data-key="Betrayed"><td>Betrayed</td><td>Broken trust.</td><td><strong>Rebuild boundaries.</strong> Lower expectations.</td></tr>
-                <tr data-key="Humiliated"><td>Humiliated</td><td>Defending damaged ego.</td><td><strong>Self-compassion.</strong> "It's not my fault."</td></tr>
-                <tr data-key="Bitter"><td>Bitter</td><td>Anger ruminating.</td><td><strong>Express & Forgive.</strong> Write it out, exercise.</td></tr>
-                <tr data-key="Mad"><td>Mad</td><td>Energy overload.</td><td><strong>Cool down.</strong> Leave the scene, deep breaths.</td></tr>
-                <tr data-key="Aggressive"><td>Aggressive</td><td>Pre-emptive strike.</td><td><strong>Explore vulnerability.</strong> What are you protecting?</td></tr>
-                <tr data-key="Frustrated"><td>Frustrated</td><td>Blocked goals.</td><td><strong>Adjust strategy.</strong> Find small wins.</td></tr>
-                <tr data-key="Distant"><td>Distant</td><td>Dissociation.</td><td><strong>Reconnect.</strong> Express real views.</td></tr>
-                <tr data-key="Critical"><td>Critical</td><td>Moral superiority.</td><td><strong>Empathy.</strong> Describe facts, don't judge.</td></tr>
+                <tr data-key="Betrayed"><td>Betrayed</td><td><strong>Broken trust.</strong> Reality violently contradicts expectations.</td><td><strong>Rebuild boundaries.</strong> Lower expectations. Clearly express your bottom line.</td></tr>
+                <tr data-key="Humiliated"><td>Humiliated</td><td><strong>Defending damaged ego.</strong> Anger turned inward; feeling foolish.</td><td><strong>Self-compassion.</strong> Tell yourself: "Being hurt is not my fault."</td></tr>
+                <tr data-key="Bitter"><td>Bitter</td><td><strong>Anger ruminating.</strong> Suppressed anger turning into resentment.</td><td><strong>Express & Forgive.</strong> Write a letter (don't send), exercise. Forgive to free yourself.</td></tr>
+                <tr data-key="Mad"><td>Mad</td><td><strong>Energy overload.</strong> Prefrontal cortex (reason) offline.</td><td><strong>Physical cool down.</strong> Leave the scene, wash face with cold water.</td></tr>
+                <tr data-key="Aggressive"><td>Aggressive</td><td><strong>Pre-emptive strike.</strong> Attacking to avoid being hurt.</td><td><strong>Explore vulnerability.</strong> Ask yourself: "What am I trying to protect?"</td></tr>
+                <tr data-key="Frustrated"><td>Frustrated</td><td><strong>Blocked goals.</strong> Powerlessness despite effort.</td><td><strong>Adjust strategy.</strong> Accept current path isn't working. Find small wins.</td></tr>
+                <tr data-key="Distant"><td>Distant</td><td><strong>Dissociation.</strong> Anger is too overwhelming, so you shut down.</td><td><strong>Reconnect.</strong> Realize you are avoiding. Express real views in small steps.</td></tr>
+                <tr data-key="Critical"><td>Critical</td><td><strong>Moral superiority.</strong> Belittling others to soothe your own anger.</td><td><strong>Empathy.</strong> Describe facts, don't judge character.</td></tr>
                 </tbody></table>`,
             'B': `
-                <p><strong>😨 Core: Flight</strong>. Cortisol warns of danger.</p>
+                <p><strong>😨 Core: Flight/Freeze</strong>. Cortisol spikes to warn of danger.</p>
                 <table><thead><tr><th>Emotion</th><th>Mechanism</th><th>Antidote</th></tr></thead><tbody>
-                <tr data-key="Scared"><td>Scared</td><td>Acute stress.</td><td><strong>Grounding.</strong> 5-4-3-2-1 technique.</td></tr>
-                <tr data-key="Anxious"><td>Anxious</td><td>Fear of future.</td><td><strong>Plan B.</strong> Distinguish fact from imagination.</td></tr>
-                <tr data-key="Insecure"><td>Insecure</td><td>Social comparison.</td><td><strong>Growth mindset.</strong> Focus on your own progress.</td></tr>
-                <tr data-key="Weak"><td>Weak</td><td>Learned helplessness.</td><td><strong>Small wins.</strong> Do something very easy.</td></tr>
-                <tr data-key="Rejected"><td>Rejected</td><td>Lack of belonging.</td><td><strong>Connect.</strong> Find your tribe.</td></tr>
-                <tr data-key="Threatened"><td>Threatened</td><td>Hyper-vigilance.</td><td><strong>Safe space.</strong> Find a physical safe zone.</td></tr>
+                <tr data-key="Scared"><td>Scared</td><td><strong>Acute stress.</strong> Core self feels under immediate threat.</td><td><strong>Grounding.</strong> 5-4-3-2-1 technique (5 things you see, 4 touch, etc).</td></tr>
+                <tr data-key="Anxious"><td>Anxious</td><td><strong>Fear of future.</strong> Brain rehearsing catastrophes for control.</td><td><strong>Distinguish reality.</strong> Ask: "Is this fact or imagination?" Make a Plan B.</td></tr>
+                <tr data-key="Insecure"><td>Insecure</td><td><strong>Social comparison.</strong> Fear of being ousted from the tribe.</td><td><strong>Growth mindset.</strong> "I'm not there YET." Focus on your own progress.</td></tr>
+                <tr data-key="Weak"><td>Weak</td><td><strong>Learned helplessness.</strong> Lack of positive feedback loop.</td><td><strong>Small wins.</strong> Set a very low bar and cross it to build confidence.</td></tr>
+                <tr data-key="Rejected"><td>Rejected</td><td><strong>Lack of belonging.</strong> Social pain uses same brain areas as physical pain.</td><td><strong>Connect.</strong> Find a community that accepts you. Do a small act of kindness.</td></tr>
+                <tr data-key="Threatened"><td>Threatened</td><td><strong>Hyper-vigilance.</strong> Environment feels unsafe.</td><td><strong>Safe space.</strong> Find a physical safe zone or imagine a mental safe island.</td></tr>
                 </tbody></table>`,
             'C': `
-                <p><strong>😢 Core: Recovery</strong>. Processing loss.</p>
+                <p><strong>😢 Core: Recovery</strong>. Energy conservation to process loss and signal for help.</p>
                 <table><thead><tr><th>Emotion</th><th>Mechanism</th><th>Antidote</th></tr></thead><tbody>
-                <tr data-key="Apprehensive"><td>Apprehensive</td><td>Low dopamine.</td><td><strong>Action.</strong> Move your body.</td></tr>
-                <tr data-key="Guilty"><td>Guilty</td><td>Self-punishment.</td><td><strong>Make amends.</strong> Apologize or forgive self.</td></tr>
-                <tr data-key="Despair"><td>Despair</td><td>Giving up.</td><td><strong>Acceptance.</strong> Seek help.</td></tr>
-                <tr data-key="Vulnerable"><td>Vulnerable</td><td>Defense down.</td><td><strong>Self-soothe.</strong> Hug yourself.</td></tr>
-                <tr data-key="Lonely"><td>Lonely</td><td>Need connection.</td><td><strong>Deep talk.</strong> Talk to one person.</td></tr>
+                <tr data-key="Apprehensive"><td>Apprehensive</td><td><strong>Low dopamine.</strong> Loss of motivation, feeling empty.</td><td><strong>Behavioral activation.</strong> Move your body even if you don't want to (e.g., clean up).</td></tr>
+                <tr data-key="Guilty"><td>Guilty</td><td><strong>Superego punishment.</strong> Belief that you violated a standard.</td><td><strong>Make amends.</strong> Apologize if needed, or learn the lesson and forgive yourself.</td></tr>
+                <tr data-key="Despair"><td>Despair</td><td><strong>Giving up.</strong> Believing pain is permanent and pervasive.</td><td><strong>Acceptance & Help.</strong> Allow yourself to pause. Seek professional help.</td></tr>
+                <tr data-key="Vulnerable"><td>Vulnerable</td><td><strong>Defense mechanism down.</strong> "Psychological skin" is thin.</td><td><strong>Self-soothe.</strong> Care for yourself like a sick child (tea, blanket).</td></tr>
+                <tr data-key="Lonely"><td>Lonely</td><td><strong>Unmet attachment needs.</strong> A signal to seek connection.</td><td><strong>Deep connection.</strong> Quality over quantity. Talk deeply to one person or pet.</td></tr>
                 </tbody></table>`,
             'D': `
-                <p><strong>😮 Core: Surprise</strong>. Unexpected reality.</p>
-                <p>Antidote: <strong>Curiosity</strong>.</p>
-                <ul><li>Positive -> Creativity</li><li>Negative -> Information Seeking</li></ul>`,
+                <p><strong>😮 Core: Orientation Reflex</strong>. Brain detects mismatch between expectation and reality.</p>
+                <p>Surprise is a neutral bridge. The antidote is <strong>"Stay Curious"</strong>:</p>
+                <ul>
+                    <li>If <strong>Positive</strong> (Surprise) -> Turn into <strong>Creativity</strong>.</li>
+                    <li>If <strong>Confused</strong> -> Turn into <strong>Exploration</strong> (Seek information).</li>
+                    <li>If <strong>Startled</strong> -> Practice <strong>Grounding</strong> (Confirm safety).</li>
+                </ul>`,
             'E': `
-                <p><strong>😓 Core: Burnout</strong>. System overload.</p>
-                <table><thead><tr><th>Emotion</th><th>Antidote</th></tr></thead><tbody>
-                <tr data-key="Tired"><td>Tired</td><td><strong>Deep Rest.</strong> Sleep, not scrolling.</td></tr>
-                <tr data-key="Stressed"><td>Stressed</td><td><strong>Subtract.</strong> Do less.</td></tr>
-                <tr data-key="Busy"><td>Busy</td><td><strong>Slow down.</strong> Single-tasking.</td></tr>
-                <tr data-key="Bored"><td>Bored</td><td><strong>Find Flow.</strong> Find a challenge.</td></tr>
+                <p><strong>😓 Core: Burnout</strong>. System overload or resource depletion.</p>
+                <table><thead><tr><th>Emotion</th><th>Mechanism</th><th>Antidote</th></tr></thead><tbody>
+                <tr data-key="Tired"><td>Tired</td><td><strong>Energy depletion.</strong> Adenosine buildup requesting shutdown.</td><td><strong>Deep Rest.</strong> Sleep, meditation, or doing nothing. Not scrolling phone.</td></tr>
+                <tr data-key="Stressed"><td>Stressed</td><td><strong>Regulation collapse.</strong> Input pressure > Processing capacity.</td><td><strong>Subtract.</strong> Delete to-do items. Say "No". Do only one thing.</td></tr>
+                <tr data-key="Busy"><td>Busy</td><td><strong>Sympathetic arousal.</strong> Chronic "rushing" mode. High cortisol.</td><td><strong>Slow down.</strong> Deliberately move slower. Single-tasking.</td></tr>
+                <tr data-key="Bored"><td>Bored</td><td><strong>Low arousal.</strong> Lack of stimulus or meaning (Dopamine low).</td><td><strong>Find Flow.</strong> Find a challenge that matches your skill. Gamify tasks.</td></tr>
                 </tbody></table>`,
             'F': `
-                <p><strong>🤢 Core: Rejection</strong>. Protecting from toxicity.</p>
+                <p><strong>🤢 Core: Disgust</strong>. Rejection to protect self from toxicity (physical or moral).</p>
                 <table><thead><tr><th>Emotion</th><th>Mechanism</th><th>Antidote</th></tr></thead><tbody>
-                <tr data-key="Disapproval"><td>Disapproval</td><td>Value conflict.</td><td><strong>Respect.</strong> Different is not toxic.</td></tr>
-                <tr data-key="Disappointed"><td>Disappointed</td><td>Expectation failed.</td><td><strong>Acceptance.</strong> See reality as it is.</td></tr>
-                <tr data-key="Awful"><td>Awful</td><td>Physical revulsion.</td><td><strong>Distance.</strong> Physical/Mental separation.</td></tr>
-                <tr data-key="Avoidance"><td>Avoidance</td><td>Defensive pushing.</td><td><strong>Boundaries.</strong> Say no firmly.</td></tr>
+                <tr data-key="Disapproval"><td>Disapproval</td><td><strong>Value conflict.</strong> Establishing psychological boundaries.</td><td><strong>Respect differences.</strong> Realize "different" doesn't mean "toxic". Distance if needed.</td></tr>
+                <tr data-key="Disappointed"><td>Disappointed</td><td><strong>Idealization broken.</strong> Reality falls short of expectation.</td><td><strong>Accept reality.</strong> Acknowledge this is the truth. Adjust future interaction.</td></tr>
+                <tr data-key="Awful"><td>Awful</td><td><strong>Defensive repulsion.</strong> Deep visceral aversion.</td><td><strong>Physical/Mental isolation.</strong> This is a strong signal: Leave the environment/person.</td></tr>
+                <tr data-key="Avoidance"><td>Avoidance</td><td><strong>Pushing away.</strong> Wanting to create distance.</td><td><strong>Boundaries.</strong> Say "No" firmly or physically step back.</td></tr>
                 </tbody></table>`,
             'G': `
-                <p><strong>😄 Core: Reward</strong>.</p>
-                <p>Action: <strong>Share and Record it</strong>.</p>`
+                <p><strong>😄 Core Mechanism: Reward Circuit</strong>. A symphony of dopamine, serotonin, and oxytocin.</p>
+                <p>The key to maintaining this state is: <strong>Awareness and Sharing</strong>. When you name this joy and translate it into action or share it with others, the joy multiplies.</p>
+                <p>Suggestion: <strong>Record it</strong>. This is your psychological energy reserve.</p>`
         }
     }
 };

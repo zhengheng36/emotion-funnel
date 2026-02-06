@@ -72,7 +72,11 @@ const app = {
         const uiData = RESOURCES[app.state.lang].ui;
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
-            if (uiData[key]) el.innerText = uiData[key];
+            if (uiData[key]) {
+                // 【修改点】把 innerText 改成 innerHTML
+                // 这样 <strong> 标签才会生效，而不是直接显示代码
+                el.innerHTML = uiData[key]; 
+            }
         });
     },
 
