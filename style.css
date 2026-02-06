@@ -239,3 +239,22 @@ th { background-color: #f8f9fa; }
     border-radius: 4px;
 }
 
+/* 语言切换按钮 */
+.lang-btn {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 5px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--text-sub);
+    transition: all 0.2s;
+    font-weight: bold;
+}
+
+.lang-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: #f0f7ff;
+}
+
